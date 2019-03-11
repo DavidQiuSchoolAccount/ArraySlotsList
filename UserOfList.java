@@ -1,39 +1,25 @@
-/** 
- Test list features.
+/**
+ * An application that exercises the list implementation.
  */
 public class UserOfList {
-    public static void main( String[] args ) {
-        List_inArraySlots list = new List_inArraySlots();
+	public static void main(String[] args) {
+		ArraySlotsList list = new ArraySlotsList();
+		printList(list);
 
-        System.out.println( "number of elements: " + list.size() );
-        System.out.println( "empty list:" + list);
+		for(int i = 0; i < 50; i++) {
+			int size = list.size();
+			if(size == 10 || size == 20 || size == 40) { System.out.println("Expansion expected."); }
 
-        /* Populate the list with elements, but with a small enough
-           number that we expect no invocation of expand().
-        */
-        int i = 0;
-        for( ; i < 5; i++ ) {
-            list.add( -i); // differs from index, but similar
-            System.out.println( "number of elements: " + list.size() );
-        }
-        System.out.println("initial population of " + list.size() + " elements:");
-        System.out.println( list);
-        
-        // Add enough elements that expansion is expected
-        for( ; i < 15; i++ ) {
-            
-            if( i == 10) System.out.println( "expansion expected");
-            
-            list.add( -i);
-            System.out.println( "number of elements: " + list.size() );
-        }
-        System.out.println("result of second population: " + list.size() + " elements:");
-        System.out.println( list);
-        
-        // Trust no one.
-        for( ; i < 35; i++ ) 
-            list.add( -i);
-        System.out.println("after second expansion: " + list.size() + " elements:");
-        System.out.println( list);
-    }
+			int entry = i * 10;
+			System.out.println("Adding " + entry);
+			list.add(entry);
+			printList(list);
+			System.out.println();
+		}
+	}
+
+	private static void printList(ArraySlotsList list) {
+		System.out.println("The list: " + list);
+		System.out.println("It holds " + list.size() + " elements.");
+	}
 }
